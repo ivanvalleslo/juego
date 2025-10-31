@@ -1,0 +1,229 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at center, #1e003d 0%, #000 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.ad-container {
+  background-image: url("assets/bg_Blue.png");
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 96%;
+  height: 96%;
+  aspect-ratio: 9 / 16;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.4);
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeInContainer 2s ease forwards;
+  gap: 10px;
+  padding: 20px 0;
+}
+
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+  opacity: 0;
+  animation: logoSlideDown 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.logo {
+  max-width: 13vh;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.7);
+  flex-grow: 1;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-height: 50vh; 
+  width: auto; 
+  aspect-ratio: 9 / 16;
+  overflow: visible;
+  z-index: 5;
+  flex-grow: 0.9;	
+}
+
+.carousel-inner {
+  width: 100%;
+  height: 100%;
+  animation: carouselSlideUp 1s ease forwards;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: scale(0.8) translateX(0);
+  transition: all 1s ease-in-out;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 3vh;
+  animation: zoom 10s ease-in-out infinite alternate;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1) translateX(0);
+  z-index: 2;
+}
+
+.slide.prev {
+  transform: scale(0.85) translateX(-25%);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.slide.next {
+  transform: scale(0.85) translateX(25%);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.dots {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  z-index: 3;
+}
+
+.dot {
+  display: none;
+  width: 8px;
+  height: 8px;
+  margin: 4px;
+  background-color: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background-color: #ffb703;
+}
+
+.bottom-text {
+  position: relative;
+  width: auto;
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  animation: carouselSlideUp 1s ease forwards;
+  animation-delay: 0.3s;
+  flex-shrink: 0;
+}
+
+.bottom-text h2 {
+  font-size: 1.2em;
+  margin-bottom: 0px;
+}
+
+.bottom-text p {
+  font-size: 0.7em;
+  margin-bottom: 6vh;
+}
+
+.cta-img {
+  width: 160px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  animation: bounceCTA 2s ease-in-out infinite;
+}
+
+.cta-img:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+@keyframes fadeInContainer {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes logoSlideDown {
+  from { opacity: 0; transform: translateY(-60px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes carouselSlideUp {
+  from { opacity: 0; transform: translateY(60px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+
+@keyframes bounceCTA {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-6px) scale(1.05); }
+}
+
+@media (orientation: landscape) {
+  .ad-container {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0px;
+    height: 95vh;
+  }
+  
+  .carousel {
+    flex: 0 0 auto;
+    width: 30vh; 
+    height: 53.33vh;
+    max-width: none;
+    max-height: none;
+  }
+  
+  .logo-container,
+  .bottom-text {
+    flex: 1;
+    max-width: 30%;
+  }
+  
+  .logo {
+    max-width: 100px;
+  }
+  
+  .bottom-text h2 {
+    font-size: 1.2em;
+  }
+  
+  .bottom-text p {
+    font-size: 0.8em;
+  }
+}
